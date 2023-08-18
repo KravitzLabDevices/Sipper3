@@ -52,7 +52,7 @@ void StartUpCommands () {
   CreateFile();
   DateTime now = rtc.now();
   StartTime = now.unixtime() ;  //StartTime for the file
-  writeHeader();
+  writeHeader_test(); //change to test or not
 
   //Zero touch sensors
   delay (1000);

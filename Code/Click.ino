@@ -1,9 +1,9 @@
 void Click() {
-  tone (buzzer, 1600, 20);
+  tone (buzzer, 1600, 2);
 }
 
 void Click2() {
-  tone (buzzer, 800, 20);
+  tone (buzzer, 800, 2);
 }
 
 void resetsound() {

@@ -47,4 +47,5 @@ void setup() {
 void loop() {
   CheckSippers();
   GoToSleep();
+ // LogData_test();
 }

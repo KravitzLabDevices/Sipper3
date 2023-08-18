@@ -4,11 +4,17 @@ void LogData() {
   WriteToSD();
   logfile.flush();
   digitalWrite(RED_LED, HIGH);  //blink while logging
-  delay(50);
+  delay(25);
   digitalWrite(RED_LED, LOW);  //blink while logging
-  delay(50);
+}
+
+void LogData_test() {
+  Serial.println("Logging data");
+  ReadBatteryLevel();  //Read battery level
+  WriteToSD_test();
+  logfile.flush();
   digitalWrite(RED_LED, HIGH);  //blink while logging
-  delay(50);
+  delay(25);
   digitalWrite(RED_LED, LOW);  //blink while logging
 }
 
@@ -45,6 +51,13 @@ void writeHeader() {
   Serial.println("Ready to go!");
 }
 
+void writeHeader_test() {
+  logfile.println("MM:DD:YYYY hh:mm:ss,ElapsedSecs,Device,LeftCap,RightCap,Temperature(C),BatteryVoltage(V)");
+  ReadBatteryLevel();
+  WriteToSD_test();  //Write one line of zeros to logfile to note start of session
+  Serial.println("Ready to go!");
+}
+
 // Write data to SD
 void WriteToSD() {
   DateTime now = rtc.now();
@@ -59,7 +72,7 @@ void WriteToSD() {
   if (now.minute() < 10) {
     logfile.print('0');  // Trick to add leading zero for formatting
   }
-  logfile.print(now.minute());
+   
   logfile.print(":");
   if (now.second() < 10) {
     logfile.print('0');  // Trick to add leading zero for formatting
@@ -89,6 +102,40 @@ void WriteToSD() {
   }
   logfile.print(",");
 
+  logfile.print(rtc.getTemperature());
+  logfile.print(",");
+  logfile.println(measuredvbat);  // Print battery voltage
+}
+
+// Write data to SD
+void WriteToSD_test() {
+  DateTime now = rtc.now();
+  logfile.print(now.month());
+  logfile.print("/");
+  logfile.print(now.day());
+  logfile.print("/");
+  logfile.print(now.year());
+  logfile.print(" ");
+  logfile.print(now.hour());
+  logfile.print(":");
+  if (now.minute() < 10) {
+    logfile.print('0');  // Trick to add leading zero for formatting
+  }
+  logfile.print(now.minute());
+  logfile.print(":");
+  if (now.second() < 10) {
+    logfile.print('0');  // Trick to add leading zero for formatting
+  }
+  logfile.print(now.second());
+  logfile.print(",");
+  logfile.print(now.unixtime() - StartTime);  //elapsed time
+  logfile.print(",");
+  logfile.print(Sip);  // Print device name
+  logfile.print(",");
+  logfile.print(qt_1.measure() - baseline1);
+  logfile.print(",");
+  logfile.print(qt_2.measure() - baseline2);
+  logfile.print(",");
   logfile.print(rtc.getTemperature());
   logfile.print(",");
   logfile.println(measuredvbat);  // Print battery voltage
