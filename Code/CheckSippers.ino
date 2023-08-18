@@ -3,7 +3,7 @@
 ********************************************************/
 void CheckSippers() {
   //If left sipper is triggered
-  if ((qt_1.measure() - baseline1) > 50) {
+  if ((qt_1.measure() - baseline1) > 25) {
     Click();
     unsigned long start = millis();
     LeftCount++;
@@ -12,7 +12,7 @@ void CheckSippers() {
     digitalWrite(RED_LED, LOW);
     Serial.print("Left: ");
     Serial.print(LeftCount);
-    while ((qt_1.measure() - baseline1) > 50) {
+    while ((qt_1.measure() - baseline1) > 25) {
     }
     LeftDuration = millis() - start;
     RightDuration = 0;
@@ -22,7 +22,7 @@ void CheckSippers() {
   }
 
   //If right sipper is triggered
-  if ((qt_2.measure() - baseline2) > 50) {
+  if ((qt_2.measure() - baseline2) > 25) {
     Click2();
     unsigned long start = millis();
     RightCount++;
@@ -31,7 +31,7 @@ void CheckSippers() {
     digitalWrite(GREEN_LED, LOW);
     Serial.print("Right: ");
     Serial.print(RightCount);
-    while ((qt_2.measure() - baseline2) > 50) {
+    while ((qt_2.measure() - baseline2) > 25) {
     }
     RightDuration = millis() - start;
     LeftDuration = 0;
