@@ -15,8 +15,9 @@ SdFat SD;             //Quick way to make SdFat work with standard SD.h sketches
 /********************************************************
   Initialize FreeTouch
 ********************************************************/
-Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A1, OVERSAMPLE_16, RESISTOR_50K, FREQ_MODE_NONE);
-Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(A2, OVERSAMPLE_16, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(A1, OVERSAMPLE_64, RESISTOR_100K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(A2, OVERSAMPLE_64, RESISTOR_100K, FREQ_MODE_NONE);
+int sensitivity = 15;  //modify this to change sensitivity to touch
 int baseline1 ;
 int baseline2 ;
 

@@ -3,7 +3,7 @@
 ********************************************************/
 void CheckSippers() {
   //If left sipper is triggered
-  if ((qt_1.measure() - baseline1) > 25) {
+  if ((qt_1.measure() - baseline1) > sensitivity) {
     Click();
     unsigned long start = millis();
     LeftCount++;
@@ -12,7 +12,9 @@ void CheckSippers() {
     digitalWrite(RED_LED, LOW);
     Serial.print("Left: ");
     Serial.print(LeftCount);
-    while ((qt_1.measure() - baseline1) > 25) {
+    Serial.print("   Capacitance Reading: ");
+    Serial.print(qt_1.measure() - baseline1);
+    while ((qt_1.measure() - baseline1) > sensitivity) {
     }
     LeftDuration = millis() - start;
     RightDuration = 0;
@@ -22,7 +24,7 @@ void CheckSippers() {
   }
 
   //If right sipper is triggered
-  if ((qt_2.measure() - baseline2) > 25) {
+  if ((qt_2.measure() - baseline2) > sensitivity) {
     Click2();
     unsigned long start = millis();
     RightCount++;
@@ -31,7 +33,9 @@ void CheckSippers() {
     digitalWrite(GREEN_LED, LOW);
     Serial.print("Right: ");
     Serial.print(RightCount);
-    while ((qt_2.measure() - baseline2) > 25) {
+    Serial.print("   Capacitance Reading: ");
+    Serial.print(qt_2.measure() - baseline2);
+    while ((qt_2.measure() - baseline2) > sensitivity) {
     }
     RightDuration = millis() - start;
     LeftDuration = 0;

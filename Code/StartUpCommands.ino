@@ -2,7 +2,7 @@
   Start Up Commands
 ********************************************************/
 void StartUpCommands () {
-  //Serial.begin(115200);
+  Serial.begin(115200);
 
   /********************************************************
     Start FreeTouch
